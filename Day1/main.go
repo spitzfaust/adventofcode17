@@ -2,16 +2,11 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"strconv"
 	"strings"
-)
 
-func check(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
+	"github.com/spitzfaust/adventofcode17/util"
+)
 
 // StringToNumbers converts a string to a slice of ints.
 func StringToNumbers(s string) []int {
@@ -20,7 +15,7 @@ func StringToNumbers(s string) []int {
 	for _, r := range s {
 		c := string(r)
 		number, err := strconv.Atoi(c)
-		check(err)
+		util.Check(err)
 		numbers = append(numbers, number)
 	}
 	return numbers
@@ -55,32 +50,16 @@ func FindNumbersForHalfwaySum(numbers []int) []int {
 	return numbersForSum
 }
 
-// Sum returns the sum of an int slice.
-func Sum(numbers []int) int {
-	var sum int
-	for _, number := range numbers {
-		sum += number
-	}
-	return sum
-}
-
-// ReadFileToString reads the contents of a file into a string.
-func ReadFileToString(filepath string) string {
-	dat, err := ioutil.ReadFile(filepath)
-	check(err)
-	return string(dat)
-}
-
 func main() {
-	s := ReadFileToString("./input.txt")
+	s := util.ReadFileToString("./input.txt")
 	fmt.Println(s)
 	numbers := StringToNumbers(s)
 
 	numbersForSum := FindNumbersForSum(numbers)
-	sum := Sum(numbersForSum)
+	sum := util.Sum(numbersForSum)
 	fmt.Println(sum)
 
 	numbersForHalfwaySum := FindNumbersForHalfwaySum(numbers)
-	halfwaySum := Sum(numbersForHalfwaySum)
+	halfwaySum := util.Sum(numbersForHalfwaySum)
 	fmt.Println(halfwaySum)
 }
