@@ -69,19 +69,6 @@ const (
 	west
 )
 
-type node struct {
-	index     int
-	value     int
-	northwest *node
-	north     *node
-	northeast *node
-	east      *node
-	southeast *node
-	south     *node
-	southwest *node
-	west      *node
-}
-
 var directionList = [...]direction{
 	northwest,
 	north,
@@ -93,7 +80,7 @@ var directionList = [...]direction{
 	west,
 }
 
-func valueForNode(p point, m map[point]int) int {
+func valueForPoint(p point, m map[point]int) int {
 	if m[p] != 0 {
 		return m[p]
 	}
@@ -176,7 +163,7 @@ func spiralStressTest(target int) int {
 	m := make(map[point]int)
 	m[currentPoint] = start
 	for i := 1; value < target; i++ {
-		value = valueForNode(currentPoint, m)
+		value = valueForPoint(currentPoint, m)
 		m[currentPoint] = value
 		if currentDirection == east {
 			currentPoint.x++
