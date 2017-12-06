@@ -22,12 +22,6 @@ func stringsToInts(fields []string) []int {
 	return numbers
 }
 
-func getMD5Hash(state []int) string {
-	hasher := md5.New()
-	hasher.Write([]byte(fmt.Sprint(state)))
-	return hex.EncodeToString(hasher.Sum(nil))
-}
-
 func findMaxIndex(numbers []int) int {
 	maxIndex := 0
 	max := numbers[maxIndex]
@@ -60,7 +54,7 @@ func main() {
 	size := len(numbers)
 	var currentState string
 	for {
-		currentState = getMD5Hash(numbers)
+		currentState = fmt.Sprint(numbers)
 		if _, found := states[currentState]; found {
 			break
 		} else {
