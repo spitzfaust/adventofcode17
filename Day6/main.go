@@ -2,8 +2,6 @@ package main
 
 import (
 	"bufio"
-	"crypto/md5"
-	"encoding/hex"
 	"fmt"
 	"os"
 	"strconv"
@@ -72,7 +70,9 @@ func main() {
 	}
 	cycles := count - states[currentState]
 	fmt.Println(currentState)
+	fmt.Print("Cycles: ")
 	fmt.Println(cycles)
+	fmt.Print("Count: ")
 	fmt.Println(count)
 
 }
